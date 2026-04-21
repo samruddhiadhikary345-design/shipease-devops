@@ -23,6 +23,7 @@ services:
       - "5001:5001"
     environment:
       PORT: 5001
+      START_SERVER: "true"
       MONGODB_URI: mongodb://mongodb:27017/porter_dev
       JWT_SECRET: your_super_secret_jwt_key_change_in_production
       DRIVER_SERVICE_URL: http://driver-service:5003
@@ -45,6 +46,7 @@ services:
       - "5002:5002"
     environment:
       PORT: 5002
+      START_SERVER: "true"
       MONGODB_URI: mongodb://mongodb:27017/porter_dev
       DRIVER_SERVICE_URL: http://driver-service:5003
       TRACKING_SERVICE_URL: http://tracking-service:5004
@@ -63,6 +65,7 @@ services:
       - "5003:5003"
     environment:
       PORT: 5003
+      START_SERVER: "true"
       MONGODB_URI: mongodb://mongodb:27017/porter_dev
       BOOKING_SERVICE_URL: http://booking-service:5002
       TRACKING_SERVICE_URL: http://tracking-service:5004
@@ -80,6 +83,7 @@ services:
       - "5004:5004"
     environment:
       PORT: 5004
+      START_SERVER: "true"
       MONGODB_URI: mongodb://mongodb:27017/porter_dev
       NOTIFICATION_SERVICE_URL: http://notification-service:5005
       DRIVER_SERVICE_URL: http://driver-service:5003
@@ -98,6 +102,7 @@ services:
       - "5005:5005"
     environment:
       PORT: 5005
+      START_SERVER: "true"
       MONGODB_URI: mongodb://mongodb:27017/porter_dev
       USER_SERVICE_URL: http://user-service:5001
     depends_on:

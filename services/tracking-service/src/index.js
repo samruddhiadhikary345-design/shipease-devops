@@ -45,8 +45,10 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5004;
 
-app.listen(PORT, () => {
-  console.log(`🚀 Tracking Service running on port ${PORT}`);
-});
+if (require.main === module || process.env.START_SERVER === 'true') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Tracking Service running on port ${PORT}`);
+  });
+}
 
 module.exports = app;
