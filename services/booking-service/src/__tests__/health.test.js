@@ -8,6 +8,9 @@ jest.mock('mongoose', () => {
 
 const request = require('supertest');
 const app = require('../index');
+const { closeServer } = require('../index');
+
+afterAll(() => { closeServer(); });
 
 describe('Booking Service health endpoint', () => {
   it('returns the service status', async () => {

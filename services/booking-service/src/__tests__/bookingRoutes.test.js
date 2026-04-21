@@ -29,7 +29,10 @@ jest.mock('../models/Booking', () => {
 const request = require('supertest');
 const axios = require('axios');
 const app = require('../index');
+const { closeServer } = require('../index');
 const Booking = require('../models/Booking');
+
+afterAll(() => { closeServer(); });
 
 describe('Booking Service routes', () => {
   const validPayload = {

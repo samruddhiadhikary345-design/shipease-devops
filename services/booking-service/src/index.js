@@ -45,10 +45,13 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5002;
 
+let server;
 if (require.main === module || process.env.START_SERVER === 'true') {
-  app.listen(PORT, () => {
+  server = app.listen(PORT, () => {
     console.log(`🚀 Booking Service running on port ${PORT}`);
   });
 }
 
 module.exports = app;
+module.exports.server = server;
+module.exports.closeServer = () => { if (server) server.close(); };

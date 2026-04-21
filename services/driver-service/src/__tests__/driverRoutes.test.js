@@ -15,7 +15,10 @@ jest.mock('../models/Driver', () => ({
 
 const request = require('supertest');
 const app = require('../index');
+const { closeServer } = require('../index');
 const Driver = require('../models/Driver');
+
+afterAll(() => { closeServer(); });
 
 describe('Driver Service routes', () => {
   beforeEach(() => {
@@ -72,7 +75,7 @@ describe('Driver Service routes', () => {
     expect(response.body.message).toContain('latitude and longitude must be valid numbers');
   });
 
-  it('assigns only compatible vehicle for selected service', async () => {
+  it('sends request to compatible vehicle driver for selected service', async () => {
     Driver.find.mockResolvedValue([
       {
         _id: 'bike-driver-id',
@@ -81,9 +84,7 @@ describe('Driver Service routes', () => {
         phone: '9990001111',
         vehicleType: 'bike',
         currentLocation: { latitude: 28.5, longitude: 77.1 },
-        toObject() {
-          return this;
-        }
+        toObject() { return this; }
       },
       {
         _id: 'auto-driver-id',
@@ -92,12 +93,11 @@ describe('Driver Service routes', () => {
         phone: '9990002222',
         vehicleType: 'auto',
         currentLocation: { latitude: 28.52, longitude: 77.12 },
-        toObject() {
-          return this;
-        }
+        toObject() { return this; }
       }
     ]);
     Driver.findByIdAndUpdate.mockResolvedValue({});
+    Driver.findOneAndUpdate = jest.fn().mockResolvedValue({});
 
     const response = await request(app)
       .post('/drivers/assign/booking-123')
@@ -111,9 +111,8 @@ describe('Driver Service routes', () => {
       });
 
     expect(response.status).toBe(200);
-    expect(response.body.assigned).toBe(true);
+    expect(response.body.requested).toBe(true);
     expect(response.body.driver.vehicleType).toBe('auto');
     expect(response.body.driver.driverId).toBe('auto-driver');
-    expect(Driver.findByIdAndUpdate).toHaveBeenCalledWith('auto-driver-id', { isAvailable: false });
   });
 });
