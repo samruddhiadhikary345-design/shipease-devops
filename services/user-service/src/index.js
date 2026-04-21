@@ -52,7 +52,7 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5001;
 
 let server;
-if (require.main === module || process.env.START_SERVER === 'true') {
+if (process.env.NODE_ENV !== 'test') {
   server = app.listen(PORT, () => {
     console.log(`🚀 User Service running on port ${PORT}`);
   });

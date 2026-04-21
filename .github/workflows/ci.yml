@@ -45,22 +45,32 @@ jobs:
     - name: Run User Service Tests
       run: npm test -- --runInBand --forceExit
       working-directory: ./services/user-service
+      env:
+        NODE_ENV: test
 
     - name: Run Booking Service Tests
       run: npm test -- --runInBand --forceExit
       working-directory: ./services/booking-service
+      env:
+        NODE_ENV: test
 
     - name: Run Driver Service Tests
       run: npm test -- --runInBand --forceExit
       working-directory: ./services/driver-service
+      env:
+        NODE_ENV: test
 
     - name: Run Tracking Service Tests
       run: npm test -- --runInBand --forceExit
       working-directory: ./services/tracking-service
+      env:
+        NODE_ENV: test
 
     - name: Run Notification Service Tests
       run: npm test -- --runInBand --forceExit
       working-directory: ./services/notification-service
+      env:
+        NODE_ENV: test
 
     - name: Build Frontend
       run: CI=true npm run build
