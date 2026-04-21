@@ -3,7 +3,6 @@ import axios from 'axios';
 import { AuthContext } from '../utils/AuthContext';
 import TrackingMap from '../components/TrackingMap';
 
-const USER_API     = 'https://shipease-devops-users-service.onrender.com';
 const BOOKING_API  = 'https://shipease-devops-booking-service.onrender.com';
 const DRIVER_API   = 'https://shipease-devops-jj73.onrender.com';
 const TRACKING_API = 'https://shipease-devops-tracking-service.onrender.com';
